@@ -1,7 +1,7 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
-import java.util.Properties;
+import com.solvd.DBCPDataSource;
 import com.solvd.dao.ICityDAO;
 import com.solvd.location.City;
 import org.apache.logging.log4j.*;
@@ -9,23 +9,21 @@ import org.apache.logging.log4j.*;
 public class CityDAO implements ICityDAO{
 
     private Logger LOGGER = LogManager.getLogger();
-    private Properties p = new Properties();
-    private String url = p.getProperty("db.url");
-    private String username = p.getProperty("db.username");
-    private String pass = p.getProperty("db.pass");
     private CountryDAO countryDAO = new CountryDAO();
 
     @Override
     public City getEntityById(long id) {
-        try(Connection con = DriverManager.getConnection(url,username,pass)){
+        try(Connection con = DBCPDataSource.getConnection()){
             PreparedStatement ps = con.prepareStatement("SELECT * FROM city WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
-            City c = new City();
-            c.setId(id);
-            c.setName(rs.getString("name"));
-            c.setCountry(countryDAO.getEntityById(rs.getInt("id_country")));
-            return c;
+            if(rs.next()){
+                City c = new City();
+                c.setId(id);
+                c.setName(rs.getString("name"));
+                c.setCountry(countryDAO.getEntityById(rs.getInt("id_country")));
+                return c;
+            }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
         }

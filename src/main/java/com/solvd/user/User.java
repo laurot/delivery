@@ -1,43 +1,32 @@
 package com.solvd.user;
 
-import com.solvd.languages.Language;
+import com.solvd.languages.Languages;
 import com.solvd.location.Address;
 
 public class User {
     private long id;
     private String name;
     private String email;
-    private String pass;
-    private Language language;
+    private Languages language;
     private Address address;
 
     public User(){}
-    public User (String name,String pass, String email, Language language){
+    public User (String name,String pass, String email, Languages language){
         this.name = name;
         this.email = email;
         this.language = language;
-        this.setPass(pass);
     }
     public boolean exists(){
         if (id != 0L)return true;
         return false;
     }    
-    public String getPass() {
-        return pass;
-    }
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-    public Boolean authenticate(String pass){
-        return(pass.equals(this.pass));
-    }
     public long getId() {
         return id;
     }
-    public Language getLanguage() {
+    public Languages getLanguage() {
         return language;
     }
-    public void setLanguage(Language language) {
+    public void setLanguage(Languages language) {
         this.language = language;
     }
     public String getEmail() {

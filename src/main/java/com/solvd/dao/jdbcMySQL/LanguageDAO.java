@@ -1,27 +1,26 @@
 package com.solvd.dao.jdbcMySQL;
 
 import com.solvd.DBCPDataSource;
-import com.solvd.dao.ICountryDAO;
-import com.solvd.location.Country;
+import com.solvd.languages.Languages;
 import java.sql.*;
+import com.solvd.dao.ILanguageDAO;
 import org.apache.logging.log4j.*;
 
-public class CountryDAO implements ICountryDAO{
+public class LanguageDAO implements ILanguageDAO{
 
     private Logger LOGGER = LogManager.getLogger();
     
     @Override
-    public Country getEntityById(long id) {
+    public Languages getEntityById(long id) {
         try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM country WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM language WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                Country c = new Country();
-                c.setId(id);
-                c.setName(rs.getString("name"));
-                c.setPriceMult(rs.getDouble("priceMultiplier"));
-                return c;
+                Languages u = new Languages();
+                u.setId(rs.getLong("id"));
+                u.setName(rs.getString("name"));
+                return u;
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
@@ -30,13 +29,13 @@ public class CountryDAO implements ICountryDAO{
     }
 
     @Override
-    public void saveEntity(Country entity) {
+    public void saveEntity(Languages entity) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void updateEntity(Country entity) {
+    public void updateEntity(Languages entity) {
         // TODO Auto-generated method stub
         
     }

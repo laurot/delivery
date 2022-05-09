@@ -3,9 +3,9 @@ package com.solvd.stores;
 public class Inventory {
     private Store store;
     private Product product;
-    private int amount;
+    private long amount;
     
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
     public Store getStore() {
@@ -20,7 +20,7 @@ public class Inventory {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public void setAmount(int amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 }

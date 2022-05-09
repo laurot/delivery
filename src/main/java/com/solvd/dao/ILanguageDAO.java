@@ -1,7 +1,7 @@
 package com.solvd.dao;
 
-import com.solvd.languages.Language;
+import com.solvd.languages.Languages;
 
-public interface ILanguageDAO  extends IBaseDAO<Language>{
+public interface ILanguageDAO  extends IBaseDAO<Languages>{
     
 }

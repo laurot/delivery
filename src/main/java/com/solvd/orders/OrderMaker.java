@@ -16,7 +16,7 @@ import org.apache.logging.log4j.*;
 
 public class OrderMaker {
     
-    private static Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
     private static final Logger Log = LogManager.getLogger();
     private IDriverDAO driverDAO = new DriverDAO();
     private IStoreDAO storeDAO = new StoreDAO();
@@ -25,12 +25,11 @@ public class OrderMaker {
 
         Delivery order = new Delivery();
         order.setUser(user);
-        order.setDestination(user.getAddress());
         order.setDriver(driverDAO.getFreeDriver());
         Log.info("----------------------------------------------");
         Log.info("What store do you want to buy from?");
         List<Store> stores = storeDAO.getStoresByCity(user.getAddress().getCity());
-        int i = 0;
+        int i = 1;
         for (Store store : stores) {
             Log.info(i+". " + store.getName() + " Address: " + store.getAddress().getAddress());
             i++;
@@ -39,12 +38,21 @@ public class OrderMaker {
         Store store = stores.get(choice - 1);
         order.setStore(store);
         List<DeliveryProducts> cart = makeCart(store);
-        if(cart.isEmpty()){
-            Log.info("Your cart is empty, operation cancelled");
-            return null;
-        }
         order.setCart(cart);
-        return order;
+        Double total = 0.0;
+        Log.info("User: " + order.getUser().getName());
+        Log.info("Store: " + order.getStore().getName());
+        Log.info("Order: ");
+        for (DeliveryProducts item : cart) {
+            Log.info(item.getProduct().getName() + " | " + item.getAmount() + " | $" + item.getProduct().getPrice());
+            total = total + item.getProduct().getPrice() * item.getAmount();
+        }
+        total = total * user.getAddress().getCity().getCountry().getPriceMult();
+        Log.info("Total price: $" + total);
+        Log.info("Insert 1 to accept");
+        choice = sc.nextInt();
+        if (choice == 1) return order;
+        return null;
     }
 
     private List<DeliveryProducts> makeCart(Store store){
@@ -60,10 +68,12 @@ public class OrderMaker {
             i++;
         }
         int choice = sc.nextInt();
+
         if (choice == 0){
             if(cart.isEmpty()) return null;
             else return cart;
         }
+
         Log.info("How many?");
         int amount = sc.nextInt();
         DeliveryProducts item = new DeliveryProducts(stock.get(choice-1).getProduct(), amount);

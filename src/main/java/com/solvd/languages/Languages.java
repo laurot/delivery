@@ -1,6 +1,6 @@
 package com.solvd.languages;
 
-public abstract class Language {
+public class Languages {
     private long id;
     private String name;
     
