@@ -1,8 +1,15 @@
 package com.solvd.location;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "city")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class City {
+    @XmlAttribute(name = "id")
     private long id;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "caountry")
     private Country country;
     
     public Country getCountry() {

@@ -1,13 +1,22 @@
 package com.solvd.user;
 
+import javax.xml.bind.annotation.*;
+
 import com.solvd.languages.Languages;
 import com.solvd.location.Address;
-
+@XmlRootElement(name = "user")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User {
+
+    @XmlAttribute(name = "id")
     private long id;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "email")
     private String email;
+    @XmlElement(name = "language")
     private Languages language;
+    @XmlElement(name = "address")
     private Address address;
 
     public User(){}

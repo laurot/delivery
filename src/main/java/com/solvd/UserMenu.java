@@ -19,9 +19,10 @@ public class UserMenu {
 
         Log.info("Menu:");
         Log.info("1.Make order");
-        Log.info("2.Change Address");
-        Log.info("3.Add Pay method");
-        Log.info("4.Change Language");
+        Log.info("2.Check Orders");
+        Log.info("3.Change Address");
+        Log.info("4.Add Pay method");
+        Log.info("5.Change Language");
         Log.info("0.Exit");
         Log.info("----------------------------------------------");
         int choice = sc.nextInt();
@@ -36,13 +37,18 @@ public class UserMenu {
                 Log.info("The order has been made");
                 break;
             case 2:
-                
+                Delivery delivery = JaxBStuff.getDelivery();
+                Log.info(delivery.getDateTime().toString());
+                //JaxBStuff.setDelivery(deliveryDAO.getEntityById(1));;
                 break;
             case 3:
                 
                 break;
             case 4:
                 
+                break;
+            case 5:
+
                 break;
             default:
                 break;

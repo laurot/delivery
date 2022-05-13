@@ -1,7 +1,12 @@
 package com.solvd.languages;
 
+import javax.xml.bind.annotation.*;
+@XmlRootElement(name = "language")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Languages {
+    @XmlAttribute(name = "id")
     private long id;
+    @XmlElement(name = "name")
     private String name;
     
     public String getName() {

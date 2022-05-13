@@ -1,14 +1,23 @@
 package com.solvd.stores;
 
+import javax.xml.bind.annotation.*;
 import com.solvd.location.Address;
 import com.solvd.user.User;
 
+@XmlRootElement(name = "store")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Store {
+    @XmlAttribute(name = "id")
     private long id;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "address")
     private Address address;
+    @XmlElement(name = "user")
     private User user;
     
+    public Store(){}
+
     public Store(long id, String name, Address address, User user){
         this.id = id;
         this.name = name;

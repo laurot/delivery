@@ -1,11 +1,10 @@
 package com.solvd;
 
-import java.util.Scanner;
-
 import com.solvd.dao.IUserDAO;
 import com.solvd.dao.jdbcMySQL.UserDAO;
 import com.solvd.user.User;
 import org.apache.logging.log4j.*;
+import java.util.Scanner;
 
 public class App 
 {
@@ -40,7 +39,12 @@ public class App
                     Log.info("----------------------------------------------");
                 }else Log.warn("User doesn't exist");
                 break;
-    
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
             default:
                 break;
         }

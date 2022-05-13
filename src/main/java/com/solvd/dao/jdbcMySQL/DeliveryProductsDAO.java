@@ -2,6 +2,8 @@ package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
 import com.solvd.DBCPDataSource;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.solvd.dao.IDeliveryProductsDAO;
 import com.solvd.orders.DeliveryProducts;
@@ -10,7 +12,7 @@ import org.apache.logging.log4j.*;
 public class DeliveryProductsDAO implements IDeliveryProductsDAO{
     
     private Logger LOGGER = LogManager.getLogger();
-
+    private ProductDAO productDAO = new ProductDAO();
     
     @Override
     public DeliveryProducts getEntityById(long id) {
@@ -49,7 +51,27 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
                 LOGGER.warn(se.getMessage());
             }
         });
-        
+    }
+
+    @Override
+    public List<DeliveryProducts> getOrderByDeliveryId(long id) {
+        try(Connection con = DBCPDataSource.getConnection()){
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM deliveryproduct WHERE id_currentDelivery = ?");
+            ps.setLong(1,id);
+            ResultSet rs = ps.executeQuery();
+            List<DeliveryProducts> list = new ArrayList<DeliveryProducts>();
+
+            while(rs.next()){
+                DeliveryProducts c = new DeliveryProducts();
+                c.setAmount(rs.getInt("amount"));
+                c.setProduct(productDAO.getEntityById(rs.getLong("id_product")));
+                list.add(c);
+            }
+            return list;
+        }catch(SQLException se){
+            LOGGER.warn(se.getMessage());
+        }
+        return null;
     }
 
 }

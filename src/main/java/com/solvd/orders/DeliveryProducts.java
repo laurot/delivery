@@ -1,12 +1,18 @@
 package com.solvd.orders;
 
+import javax.xml.bind.annotation.*;
+
 import com.solvd.stores.Product;
 
+@XmlRootElement(name = "deliveryProducts")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DeliveryProducts {
-
+    @XmlElement(name = "product")
     private Product product;
+    @XmlElement(name = "amount")
     private int amount;
 
+    public DeliveryProducts(){}
     public DeliveryProducts(Product product, int amount){
         this.product = product;
         this.amount = amount;

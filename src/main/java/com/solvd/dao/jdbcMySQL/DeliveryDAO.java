@@ -10,10 +10,30 @@ public class DeliveryDAO implements IDeliveryDAO{
 
     private Logger LOGGER = LogManager.getLogger();
     private DeliveryProductsDAO deliveryProductsDAO = new DeliveryProductsDAO();
-    
+    private UserDAO userDAO = new UserDAO();
+    private DriverDAO driverDAO = new DriverDAO();
+    private StoreDAO storeDAO = new StoreDAO();
+
     @Override
     public Delivery getEntityById(long id) {
-        // TODO Auto-generated method stub
+        try(Connection con = DBCPDataSource.getConnection()){
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM delivery WHERE id = ?");
+            ps.setLong(1,id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                Delivery c = new Delivery();
+                c.setId(id);
+                c.setUser(userDAO.getEntityById(rs.getLong("id_user")));
+                c.setDriver(driverDAO.getEntityById(rs.getLong("id_driver")));
+                c.setStore(storeDAO.getEntityById(rs.getLong("id_store")));
+                c.setDateTime(rs.getDate("timeCreated"));
+                c.setCart(deliveryProductsDAO.getOrderByDeliveryId(rs.getLong("id")));
+
+                return c;
+            }
+        }catch(SQLException se){
+            LOGGER.warn(se.getMessage());
+        }
         return null;
     }
 

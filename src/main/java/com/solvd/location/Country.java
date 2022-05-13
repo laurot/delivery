@@ -1,8 +1,15 @@
 package com.solvd.location;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "country")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Country {
+    @XmlAttribute(name = "id")
     private long id;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "priceMult")
     private Double priceMult;
 
     public Double getPriceMult() {

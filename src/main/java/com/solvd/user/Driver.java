@@ -1,10 +1,18 @@
 package com.solvd.user;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "driver")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Driver{
+    @XmlAttribute(name="id")
     private long id;
-    private User user;
+    @XmlElement(name = "rating")
     private int rating;
+    @XmlElement(name = "free")
     private boolean free;
+    @XmlElement(name = "user")
+    private User user;
     
     public int getRating() {
         return rating;

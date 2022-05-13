@@ -2,16 +2,36 @@ package com.solvd.orders;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.solvd.stores.Store;
 import com.solvd.user.Driver;
 import com.solvd.user.User;
+import com.solvd.xmlAdapter.DateAdapter;
 
+@XmlRootElement(name="delivery")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Delivery {
+
+    @XmlAttribute (name="id")
     private long id;
-    private Driver driver;
-    private Store store;
-    private User user;
+
+    @XmlElement(name = "dateTime") 
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date dateTime;
+
+    @XmlElement (name = "driver")
+    private Driver driver;
+
+    @XmlElement (name = "store")
+    private Store store;
+
+    @XmlElement (name = "user")
+    private User user;
+
+    @XmlElementWrapper(name = "cart")
+    @XmlElement(name = "deliveryProducts")
     private List<DeliveryProducts> cart;
     
     public Date getDateTime() {
