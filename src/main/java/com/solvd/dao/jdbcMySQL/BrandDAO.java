@@ -1,8 +1,9 @@
 package com.solvd.dao.jdbcMySQL;
 
-import com.solvd.DBCPDataSource;
+import com.solvd.bin.stores.Brand;
 import com.solvd.dao.IBrandDAO;
-import com.solvd.stores.Brand;
+import com.solvd.service.DBCPDataSource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.*;

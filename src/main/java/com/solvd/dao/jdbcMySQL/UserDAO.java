@@ -2,10 +2,12 @@ package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
 import java.util.List;
-import com.solvd.DBCPDataSource;
+
+import com.solvd.bin.languages.Languages;
+import com.solvd.bin.user.User;
 import com.solvd.dao.IUserDAO;
-import com.solvd.languages.Languages;
-import com.solvd.user.User;
+import com.solvd.util.DBCPDataSource;
+
 import org.apache.logging.log4j.*;
 
 public class UserDAO implements IUserDAO{
@@ -43,20 +45,17 @@ public class UserDAO implements IUserDAO{
 
     @Override
     public void updateEntity(User entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public List<User> getUsersByLanguage(Languages l) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override

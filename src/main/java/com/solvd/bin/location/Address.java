@@ -1,4 +1,4 @@
-package com.solvd.location;
+package com.solvd.bin.location;
 
 import javax.xml.bind.annotation.*;
 

@@ -1,9 +1,11 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
-import com.solvd.DBCPDataSource;
+
+import com.solvd.bin.orders.Delivery;
 import com.solvd.dao.IDeliveryDAO;
-import com.solvd.orders.Delivery;
+import com.solvd.util.DBCPDataSource;
+
 import org.apache.logging.log4j.*;
 
 public class DeliveryDAO implements IDeliveryDAO{
@@ -60,14 +62,12 @@ public class DeliveryDAO implements IDeliveryDAO{
 
     @Override
     public void updateEntity(Delivery entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
     
 }

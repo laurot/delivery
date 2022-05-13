@@ -1,14 +1,15 @@
-package com.solvd.orders;
+package com.solvd.bin.orders;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import com.solvd.stores.Store;
-import com.solvd.user.Driver;
-import com.solvd.user.User;
-import com.solvd.xmlAdapter.DateAdapter;
+
+import com.solvd.bin.stores.Store;
+import com.solvd.bin.user.Driver;
+import com.solvd.bin.user.User;
+import com.solvd.service.xmlAdapter.DateAdapter;
 
 @XmlRootElement(name="delivery")
 @XmlAccessorType(XmlAccessType.FIELD)

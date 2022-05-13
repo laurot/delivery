@@ -1,8 +1,10 @@
 package com.solvd;
 
+import com.solvd.bin.user.User;
 import com.solvd.dao.IUserDAO;
 import com.solvd.dao.jdbcMySQL.UserDAO;
-import com.solvd.user.User;
+import com.solvd.service.UserMenu;
+
 import org.apache.logging.log4j.*;
 import java.util.Scanner;
 

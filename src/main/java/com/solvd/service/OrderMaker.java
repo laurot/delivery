@@ -1,17 +1,19 @@
-package com.solvd.orders;
+package com.solvd.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.solvd.bin.orders.*;
+import com.solvd.bin.stores.Inventory;
+import com.solvd.bin.stores.Store;
+import com.solvd.bin.user.User;
 import com.solvd.dao.IDriverDAO;
 import com.solvd.dao.IInventoryDAO;
 import com.solvd.dao.IStoreDAO;
 import com.solvd.dao.jdbcMySQL.DriverDAO;
 import com.solvd.dao.jdbcMySQL.InventoryDAO;
 import com.solvd.dao.jdbcMySQL.StoreDAO;
-import com.solvd.stores.Inventory;
-import com.solvd.stores.Store;
-import com.solvd.user.User;
+
 import org.apache.logging.log4j.*;
 
 public class OrderMaker {

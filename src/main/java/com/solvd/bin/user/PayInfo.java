@@ -1,4 +1,4 @@
-package com.solvd.user;
+package com.solvd.bin.user;
 
 public class PayInfo {
     private long id;

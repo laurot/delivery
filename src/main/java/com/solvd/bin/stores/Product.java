@@ -1,4 +1,4 @@
-package com.solvd.stores;
+package com.solvd.bin.stores;
 
 public class Product {
     private long id;

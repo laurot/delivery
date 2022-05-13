@@ -1,19 +1,16 @@
-package com.solvd.location;
+package com.solvd.bin.languages;
 
 import javax.xml.bind.annotation.*;
-
-@XmlRootElement(name = "city")
+@XmlRootElement(name = "language")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class City {
+public class Languages {
     @XmlAttribute(name = "id")
     private long id;
     @XmlElement(name = "name")
     private String name;
-    @XmlElement(name = "caountry")
-    private Country country;
     
-    public Country getCountry() {
-        return country;
+    public String getName() {
+        return name;
     }
     public long getId() {
         return id;
@@ -21,13 +18,7 @@ public class City {
     public void setId(long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
-    }
     public void setName(String name) {
         this.name = name;
-    }
-    public void setCountry(Country country) {
-        this.country = country;
     }
 }

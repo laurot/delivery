@@ -3,10 +3,12 @@ package com.solvd.dao.jdbcMySQL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.solvd.DBCPDataSource;
+
+import com.solvd.bin.stores.Inventory;
+import com.solvd.bin.stores.Store;
 import com.solvd.dao.IInventoryDAO;
-import com.solvd.stores.Inventory;
-import com.solvd.stores.Store;
+import com.solvd.util.DBCPDataSource;
+
 import org.apache.logging.log4j.*;
 
 public class InventoryDAO implements IInventoryDAO{
@@ -16,26 +18,22 @@ public class InventoryDAO implements IInventoryDAO{
 
     @Override
     public Inventory getEntityById(long id) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void saveEntity(Inventory entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void updateEntity(Inventory entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
 
     @Override

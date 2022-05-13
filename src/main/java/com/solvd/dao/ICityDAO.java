@@ -1,6 +1,6 @@
 package com.solvd.dao;
 
-import com.solvd.location.City;
+import com.solvd.bin.location.City;
 
 public interface ICityDAO extends IBaseDAO<City>{
     

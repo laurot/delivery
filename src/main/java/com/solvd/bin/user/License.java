@@ -1,4 +1,4 @@
-package com.solvd.user;
+package com.solvd.bin.user;
 
 public class License {
     private long id;

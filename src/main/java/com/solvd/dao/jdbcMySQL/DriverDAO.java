@@ -1,8 +1,9 @@
 package com.solvd.dao.jdbcMySQL;
 
 import com.solvd.dao.IDriverDAO;
-import com.solvd.user.Driver;
-import com.solvd.DBCPDataSource;
+import com.solvd.util.DBCPDataSource;
+import com.solvd.bin.user.Driver;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.*;
@@ -14,26 +15,22 @@ public class DriverDAO implements IDriverDAO{
 
     @Override
     public Driver getEntityById(long id) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void saveEntity(Driver entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void updateEntity(Driver entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented"); 
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
 
     @Override

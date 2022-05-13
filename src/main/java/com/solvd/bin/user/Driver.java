@@ -1,4 +1,4 @@
-package com.solvd.user;
+package com.solvd.bin.user;
 
 import javax.xml.bind.annotation.*;
 

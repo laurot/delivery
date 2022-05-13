@@ -1,4 +1,4 @@
-package com.solvd;
+package com.solvd.service;
 
 import java.io.File;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import com.solvd.orders.Delivery;
+import com.solvd.bin.orders.Delivery;
 
 
 public class JaxBStuff {

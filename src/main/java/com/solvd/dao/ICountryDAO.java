@@ -1,6 +1,6 @@
 package com.solvd.dao;
 
-import com.solvd.location.Country;
+import com.solvd.bin.location.Country;
 
 public interface ICountryDAO extends IBaseDAO<Country> {
     

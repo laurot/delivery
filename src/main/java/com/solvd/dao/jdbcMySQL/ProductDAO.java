@@ -3,8 +3,9 @@ package com.solvd.dao.jdbcMySQL;
 import java.sql.*;
 import com.solvd.dao.IBrandDAO;
 import com.solvd.dao.IProductDAO;
-import com.solvd.stores.Product;
-import com.solvd.DBCPDataSource;
+import com.solvd.util.DBCPDataSource;
+import com.solvd.bin.stores.Product;
+
 import org.apache.logging.log4j.*;
 
 public class ProductDAO implements IProductDAO{
@@ -35,20 +36,17 @@ public class ProductDAO implements IProductDAO{
 
     @Override
     public void saveEntity(Product entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void updateEntity(Product entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
     
 }

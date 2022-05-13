@@ -1,4 +1,4 @@
-package com.solvd.xmlAdapter;
+package com.solvd.util.xmlAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.solvd;
+package com.solvd.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;

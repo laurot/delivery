@@ -1,9 +1,11 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
-import com.solvd.DBCPDataSource;
+
+import com.solvd.bin.location.Address;
 import com.solvd.dao.IAddressDAO;
-import com.solvd.location.Address;
+import com.solvd.util.DBCPDataSource;
+
 import org.apache.logging.log4j.*;
 
 public class AddressDAO implements IAddressDAO{
@@ -32,20 +34,17 @@ public class AddressDAO implements IAddressDAO{
 
     @Override
     public void saveEntity(Address entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
 
     @Override
     public void updateEntity(Address entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented"); 
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented"); 
     }
     
 }

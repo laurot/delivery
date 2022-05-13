@@ -1,4 +1,4 @@
-package com.solvd;
+package com.solvd.service;
 
 import org.apache.logging.log4j.*;
 import java.util.Scanner;

@@ -1,9 +1,9 @@
-package com.solvd.user;
+package com.solvd.bin.user;
 
 import javax.xml.bind.annotation.*;
 
-import com.solvd.languages.Languages;
-import com.solvd.location.Address;
+import com.solvd.bin.languages.Languages;
+import com.solvd.bin.location.Address;
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User {

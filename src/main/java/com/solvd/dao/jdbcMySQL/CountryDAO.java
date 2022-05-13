@@ -1,8 +1,9 @@
 package com.solvd.dao.jdbcMySQL;
 
-import com.solvd.DBCPDataSource;
+import com.solvd.bin.location.Country;
 import com.solvd.dao.ICountryDAO;
-import com.solvd.location.Country;
+import com.solvd.util.DBCPDataSource;
+
 import java.sql.*;
 import org.apache.logging.log4j.*;
 
@@ -31,20 +32,17 @@ public class CountryDAO implements ICountryDAO{
 
     @Override
     public void saveEntity(Country entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented"); 
     }
 
     @Override
     public void updateEntity(Country entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
     
 }

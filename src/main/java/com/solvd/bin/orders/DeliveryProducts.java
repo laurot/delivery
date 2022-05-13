@@ -1,8 +1,8 @@
-package com.solvd.orders;
+package com.solvd.bin.orders;
 
 import javax.xml.bind.annotation.*;
 
-import com.solvd.stores.Product;
+import com.solvd.bin.stores.Product;
 
 @XmlRootElement(name = "deliveryProducts")
 @XmlAccessorType(XmlAccessType.FIELD)

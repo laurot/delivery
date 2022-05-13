@@ -2,10 +2,10 @@ package com.solvd.dao.jdbcMySQL;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.solvd.DBCPDataSource;
+import com.solvd.bin.location.City;
+import com.solvd.bin.stores.Store;
 import com.solvd.dao.IStoreDAO;
-import com.solvd.location.City;
-import com.solvd.stores.Store;
+import com.solvd.util.DBCPDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.*;
@@ -18,26 +18,22 @@ public class StoreDAO implements IStoreDAO{
 
     @Override
     public Store getEntityById(long id) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void saveEntity(Store entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void updateEntity(Store entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override

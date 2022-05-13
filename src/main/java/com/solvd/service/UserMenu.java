@@ -1,10 +1,11 @@
-package com.solvd;
+package com.solvd.service;
 
 import java.util.Scanner;
+
+import com.solvd.bin.orders.Delivery;
+import com.solvd.bin.user.User;
 import com.solvd.dao.jdbcMySQL.DeliveryDAO;
-import com.solvd.orders.Delivery;
-import com.solvd.orders.OrderMaker;
-import com.solvd.user.User;
+
 import org.apache.logging.log4j.*;
 
 public class UserMenu {

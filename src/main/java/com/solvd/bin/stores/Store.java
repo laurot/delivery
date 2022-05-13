@@ -1,8 +1,9 @@
-package com.solvd.stores;
+package com.solvd.bin.stores;
 
 import javax.xml.bind.annotation.*;
-import com.solvd.location.Address;
-import com.solvd.user.User;
+
+import com.solvd.bin.location.Address;
+import com.solvd.bin.user.User;
 
 @XmlRootElement(name = "store")
 @XmlAccessorType(XmlAccessType.FIELD)

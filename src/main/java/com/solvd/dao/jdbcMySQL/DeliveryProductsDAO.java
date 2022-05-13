@@ -1,12 +1,14 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
-import com.solvd.DBCPDataSource;
+
+import com.solvd.bin.orders.DeliveryProducts;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.solvd.dao.IDeliveryProductsDAO;
-import com.solvd.orders.DeliveryProducts;
+import com.solvd.util.DBCPDataSource;
+
 import org.apache.logging.log4j.*;
 
 public class DeliveryProductsDAO implements IDeliveryProductsDAO{
@@ -16,26 +18,22 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
     
     @Override
     public DeliveryProducts getEntityById(long id) {
-        // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void saveEntity(DeliveryProducts entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
     public void updateEntity(DeliveryProducts entity) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented"); 
     }
 
     @Override
     public void deleteEntityById(long id) {
-        // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("This method shoould be implemented");  
     }
 
     @Override
