@@ -59,14 +59,15 @@ public class OrderMaker {
 
     private List<DeliveryProducts> makeCart(Store store){
         IInventoryDAO inventoryDAO = new InventoryDAO();
-        List<Inventory> stock = inventoryDAO.getInventoryByStore(store);
+        List<Inventory> stock = inventoryDAO.getInventoryByStoreId(store.getId());
         List<DeliveryProducts> cart = new ArrayList<DeliveryProducts>();
         do{
         Log.info("What do you want to buy?");
         Log.info("0. Checkout");
         int i = 1;
         for (Inventory product : stock) {
-            Log.info(i+". " + product.getProduct().getName() + " ----- $" +product.getProduct().getPrice());
+            Log.info(i+". " + product.getProduct().getName() + " ----- $" + 
+                product.getProduct().getPrice() * store.getAddress().getCity().getCountry().getPriceMult());
             i++;
         }
         int choice = sc.nextInt();

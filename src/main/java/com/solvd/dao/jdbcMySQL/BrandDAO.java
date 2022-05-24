@@ -2,7 +2,7 @@ package com.solvd.dao.jdbcMySQL;
 
 import com.solvd.bin.stores.Brand;
 import com.solvd.dao.IBrandDAO;
-import com.solvd.service.DBCPDataSource;
+import com.solvd.util.DBCPDataSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

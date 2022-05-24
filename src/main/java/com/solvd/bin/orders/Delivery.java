@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.solvd.bin.stores.Store;
 import com.solvd.bin.user.Driver;
 import com.solvd.bin.user.User;
-import com.solvd.service.xmlAdapter.DateAdapter;
+import com.solvd.util.xmlAdapter.DateAdapter;
 
 @XmlRootElement(name="delivery")
 @XmlAccessorType(XmlAccessType.FIELD)

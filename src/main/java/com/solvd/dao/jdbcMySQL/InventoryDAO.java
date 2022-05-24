@@ -3,9 +3,7 @@ package com.solvd.dao.jdbcMySQL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.solvd.bin.stores.Inventory;
-import com.solvd.bin.stores.Store;
 import com.solvd.dao.IInventoryDAO;
 import com.solvd.util.DBCPDataSource;
 
@@ -37,10 +35,10 @@ public class InventoryDAO implements IInventoryDAO{
     }
 
     @Override
-    public List<Inventory> getInventoryByStore(Store store) {
+    public List<Inventory> getInventoryByStoreId(Long id) {
         try(Connection con = DBCPDataSource.getConnection()){
             PreparedStatement ps = con.prepareStatement("SELECT * FROM inventory WHERE id_store = ?");
-            ps.setLong(1, store.getId());
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             List<Inventory> stock = new ArrayList<Inventory>();
 
@@ -48,7 +46,6 @@ public class InventoryDAO implements IInventoryDAO{
                 Inventory e = new Inventory();
                 e.setAmount(rs.getLong("amount"));
                 e.setProduct(productDAO.getEntityById(rs.getLong("id_product")));
-                e.setStore(store);
                 stock.add(e);
             }
             return stock;

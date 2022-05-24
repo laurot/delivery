@@ -13,7 +13,6 @@ import java.sql.*;
 public class StoreDAO implements IStoreDAO{
 
     private Logger LOGGER = LogManager.getLogger();
-    private UserDAO userDAO = new UserDAO();
     private AddressDAO addressDAO = new AddressDAO();
 
     @Override
@@ -46,8 +45,7 @@ public class StoreDAO implements IStoreDAO{
             List<Store> stores = new ArrayList<Store>();
             while(rs.next()){
                 Store e = new Store(rs.getLong("id"),rs.getString("name"),
-                                    addressDAO.getEntityById(rs.getLong("id_address")),
-                                    userDAO.getEntityById(rs.getLong("id_user")));
+                                    addressDAO.getEntityById(rs.getLong("id_address")));
                 stores.add(e);
             }
             return stores;

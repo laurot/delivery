@@ -1,8 +1,8 @@
 package com.solvd.bin.user;
 
+
 public class License {
     private long id;
-    private Driver driver;
     private long number;
     
     public long getNumber() {
@@ -13,12 +13,6 @@ public class License {
     }
     public void setId(long id) {
         this.id = id;
-    }
-    public Driver getDriver() {
-        return driver;
-    }
-    public void setDriver(Driver driver) {
-        this.driver = driver;
     }
     public void setNumber(long number) {
         this.number = number;

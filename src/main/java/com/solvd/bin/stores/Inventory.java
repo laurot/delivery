@@ -1,18 +1,15 @@
 package com.solvd.bin.stores;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Inventory {
-    private Store store;
+    @JsonProperty
     private Product product;
+    @JsonProperty
     private long amount;
     
     public long getAmount() {
         return amount;
-    }
-    public Store getStore() {
-        return store;
-    }
-    public void setStore(Store store) {
-        this.store = store;
     }
     public Product getProduct() {
         return product;

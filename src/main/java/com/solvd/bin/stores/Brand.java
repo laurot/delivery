@@ -1,8 +1,12 @@
 package com.solvd.bin.stores;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Brand {
-    private String name;
+    @JsonProperty
     private long id;
+    @JsonProperty
+    private String name;
 
     public String getName() {
         return name;

@@ -1,9 +1,15 @@
 package com.solvd.bin.stores;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Product {
+    @JsonProperty
     private long id;
+    @JsonProperty
     private String name;
+    @JsonProperty
     private Brand Brand;
+    @JsonProperty
     private Double price;
     
     public Double getPrice() {

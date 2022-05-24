@@ -1,11 +1,18 @@
 package com.solvd;
 
+import com.solvd.bin.stores.Inventory;
 import com.solvd.bin.user.User;
+import com.solvd.dao.IInventoryDAO;
 import com.solvd.dao.IUserDAO;
+import com.solvd.dao.jdbcMySQL.InventoryDAO;
 import com.solvd.dao.jdbcMySQL.UserDAO;
+import com.solvd.service.JacksonStuff;
 import com.solvd.service.UserMenu;
 
 import org.apache.logging.log4j.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App 
@@ -14,6 +21,9 @@ public class App
     private static Scanner sc = new Scanner(System.in);
     public static void main( String[] args )
     {
+        //Implementation of jackson
+        jacksonMethod();
+        //Actual implementation
         Log.info("Menu:");
         Log.info("1.User login");
         Log.info("2.Driver Login");
@@ -51,5 +61,15 @@ public class App
                 break;
         }
         main(args);
+    }
+
+    private static void jacksonMethod(){
+        JacksonStuff jacksonStuff = new JacksonStuff();
+        IInventoryDAO inventoryDAO = new InventoryDAO();
+        List<Inventory> inventory = new ArrayList<Inventory>();
+        inventory = inventoryDAO.getInventoryByStoreId(1L);
+        jacksonStuff.marshall(inventory);
+        inventory = jacksonStuff.unmarshall();
+        Log.info(inventory.get(0).getProduct().getName() + inventory.get(0).getAmount());
     }
 }
