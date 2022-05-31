@@ -1,4 +1,4 @@
-package com.solvd.bin.languages;
+package com.solvd.bin;
 
 import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "language")

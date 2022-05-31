@@ -2,7 +2,7 @@ package com.solvd.dao;
 
 import java.util.List;
 
-import com.solvd.bin.languages.Languages;
+import com.solvd.bin.Languages;
 import com.solvd.bin.user.User;
 
 public interface IUserDAO extends IBaseDAO<User>{

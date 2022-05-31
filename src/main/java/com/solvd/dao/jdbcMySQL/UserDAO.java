@@ -3,7 +3,7 @@ package com.solvd.dao.jdbcMySQL;
 import java.sql.*;
 import java.util.List;
 
-import com.solvd.bin.languages.Languages;
+import com.solvd.bin.Languages;
 import com.solvd.bin.user.User;
 import com.solvd.dao.IUserDAO;
 import com.solvd.util.DBCPDataSource;

@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.dao.IAddressDAO">
+    <resultMap type = "com.solvd.bin.location.Address" id = "AddressResultMap" autoMapping="false"/>
+        <id column = "address_id" property = "id"/>
+        <result column = "address" property = "address"/>
+        <association property = "city" resultMap = "com.solv.dao.ICityDAO.CityResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[insert into user (username, pass, email) values (#{username}, #{pass}, #{email})]]>
+    </insert>
+    <update id = "updateEntity">
+        <![CDATA[update user set username = #{username}, pass = #{pass}, email = #{email} where id = #{id};]]>
+    </update>
+    <delete id="deleteEntityById">
+        <![CDATA[delete from user where id = #{id}]]>
+    </delete>
+    <select id = "getEntityById">
+        <![CDATA[select * from user 
+        left join address on user.id_address=address.id
+        left join language on user.id_language=language.id  
+        where user.id = #{id}]]>
+    </select>
+</mapper>

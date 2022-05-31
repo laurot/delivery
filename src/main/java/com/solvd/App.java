@@ -8,9 +8,12 @@ import com.solvd.dao.jdbcMySQL.InventoryDAO;
 import com.solvd.dao.jdbcMySQL.UserDAO;
 import com.solvd.service.JacksonStuff;
 import com.solvd.service.UserMenu;
-
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.*;
-
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,9 +24,16 @@ public class App
     private static Scanner sc = new Scanner(System.in);
     public static void main( String[] args )
     {
-        //Implementation of jackson
-        jacksonMethod();
-        //Actual implementation
+        try (Reader r = Resources.getResourceAsReader("mybatis-config.xml")) {
+            SqlSessionFactory s = new SqlSessionFactoryBuilder().build(r);
+            IUserDAO UserDAO = s.openSession().getMapper(IUserDAO.class);
+            Log.info(UserDAO.getEntityById(1).getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        //jacksonMethod();
+
         Log.info("Menu:");
         Log.info("1.User login");
         Log.info("2.Driver Login");

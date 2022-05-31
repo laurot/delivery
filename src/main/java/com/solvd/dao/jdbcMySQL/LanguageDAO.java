@@ -1,8 +1,8 @@
 package com.solvd.dao.jdbcMySQL;
 
-import com.solvd.bin.languages.Languages;
-
 import java.sql.*;
+
+import com.solvd.bin.Languages;
 import com.solvd.dao.ILanguageDAO;
 import com.solvd.util.DBCPDataSource;
 

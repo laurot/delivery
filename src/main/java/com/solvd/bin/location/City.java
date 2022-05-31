@@ -9,7 +9,7 @@ public class City {
     private long id;
     @XmlElement(name = "name")
     private String name;
-    @XmlElement(name = "caountry")
+    @XmlElement(name = "country")
     private Country country;
     
     public Country getCountry() {
