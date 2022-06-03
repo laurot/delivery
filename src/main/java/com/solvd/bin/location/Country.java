@@ -11,7 +11,10 @@ public class Country {
     private String name;
     @XmlElement(name = "priceMult")
     private Double priceMult;
-
+    public Country(){}
+    public Country(long id){
+        this.id = id;
+    }
     public Double getPriceMult() {
         return priceMult;
     }

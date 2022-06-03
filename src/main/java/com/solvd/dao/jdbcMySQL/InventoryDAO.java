@@ -48,6 +48,7 @@ public class InventoryDAO implements IInventoryDAO{
                 e.setProduct(productDAO.getEntityById(rs.getLong("id_product")));
                 stock.add(e);
             }
+           
             return stock;
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());

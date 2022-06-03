@@ -3,10 +3,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.solvd.dao.ICityDAO">
-    <resultMap type = "com.solvd.bin.location.City" id = "CityResultMap" autoMapping="false"/>
+    <resultMap type = "com.solvd.bin.location.City" id = "CityResultMap" autoMapping="false">
         <id column = "city_id" property = "id"/>
         <result column = "city_name" property = "name"/>
-        <association property = "country" resultMap = "com.solv.dao.ICountryDAO.CountryResultMap"/>
+        <association property = "country" resultMap = "com.solvd.dao.ICountryDAO.CountryResultMap"/>
     </resultMap>
 
     <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">

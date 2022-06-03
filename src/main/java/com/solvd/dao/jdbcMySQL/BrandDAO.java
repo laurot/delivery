@@ -18,6 +18,7 @@ public class BrandDAO implements IBrandDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM brand WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 Brand b = new Brand();
                 b.setId(id);
@@ -36,6 +37,7 @@ public class BrandDAO implements IBrandDAO{
             PreparedStatement ps = con.prepareStatement("INSERT INTO brand (name) VALUES (?);");
             ps.setString(1, entity.getName());
             ps.executeQuery();
+           
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
         }
@@ -48,6 +50,7 @@ public class BrandDAO implements IBrandDAO{
                                                         + " WHERE id = ?;");
             ps.setString(1, entity.getName());
             ps.setLong(2, entity.getId());
+           
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
         }
@@ -59,6 +62,7 @@ public class BrandDAO implements IBrandDAO{
         try(Connection con = DBCPDataSource.getConnection()){
             PreparedStatement ps = con.prepareStatement("DELETE FROM brand WHERE id = ?;");
             ps.setLong(1,id);
+           
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
         }

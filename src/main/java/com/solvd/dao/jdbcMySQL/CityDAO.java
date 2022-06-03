@@ -19,6 +19,7 @@ public class CityDAO implements ICityDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM city WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 City c = new City();
                 c.setId(id);

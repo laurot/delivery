@@ -17,6 +17,7 @@ public class CountryDAO implements ICountryDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM country WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 Country c = new Country();
                 c.setId(id);

@@ -1,6 +1,7 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
+import java.util.List;
 
 import com.solvd.bin.Languages;
 import com.solvd.dao.ILanguageDAO;
@@ -18,6 +19,7 @@ public class LanguageDAO implements ILanguageDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM language WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 Languages u = new Languages();
                 u.setId(rs.getLong("id"));
@@ -42,6 +44,11 @@ public class LanguageDAO implements ILanguageDAO{
 
     @Override
     public void deleteEntityById(long id) {
+        throw new UnsupportedOperationException("This method shoould be implemented");
+    }
+
+    @Override
+    public List<Languages> getLanguages() {
         throw new UnsupportedOperationException("This method shoould be implemented");
     }
     

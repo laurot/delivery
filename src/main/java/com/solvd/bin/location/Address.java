@@ -12,6 +12,11 @@ public class Address {
     @XmlElement(name = "city")
     private City city;
     
+    public Address(){}
+    public Address(String address){
+        this.address = address;
+        this.city = new City(1);
+    }
     public City getCity() {
         return city;
     }

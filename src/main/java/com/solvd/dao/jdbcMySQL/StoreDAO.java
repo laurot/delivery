@@ -42,6 +42,7 @@ public class StoreDAO implements IStoreDAO{
                 "SELECT s.* FROM store s join address a on a.id = s.id_address WHERE a.id_city = ?");
             ps.setLong(1, city.getId());
             ResultSet rs = ps.executeQuery();
+           
             List<Store> stores = new ArrayList<Store>();
             while(rs.next()){
                 Store e = new Store(rs.getLong("id"),rs.getString("name"),

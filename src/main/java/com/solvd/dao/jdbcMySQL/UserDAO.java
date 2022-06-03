@@ -1,9 +1,6 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
-import java.util.List;
-
-import com.solvd.bin.Languages;
 import com.solvd.bin.user.User;
 import com.solvd.dao.IUserDAO;
 import com.solvd.util.DBCPDataSource;
@@ -23,6 +20,7 @@ public class UserDAO implements IUserDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 User u = new User();
                 u.setId(rs.getLong("id"));
@@ -53,10 +51,6 @@ public class UserDAO implements IUserDAO{
         throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
-    @Override
-    public List<User> getUsersByLanguage(Languages l) {
-        throw new UnsupportedOperationException("This method shoould be implemented");
-    }
 
     @Override
     public User getUserByUsername(String user) {
@@ -64,10 +58,12 @@ public class UserDAO implements IUserDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE username = ?");
             ps.setString(1,user);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 User u = new User();
                 u.setId(rs.getLong("id"));
                 u.setName(rs.getString("username"));
+                u.setPass(rs.getString("pass"));
                 u.setEmail(rs.getString("email"));
                 u.setLanguage(languageDAO.getEntityById(rs.getLong("id_language")));
                 u.setAddress(addressDAO.getEntityById(rs.getLong("id_address")));
@@ -78,21 +74,4 @@ public class UserDAO implements IUserDAO{
         }
         return null;
     }
-
-    @Override
-    public boolean authenticate(User user, String pass) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT pass FROM user WHERE id = ?");
-            ps.setLong(1,user.getId());
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                if(pass.equals(rs.getString("pass"))) return true;
-            }
-        }catch(SQLException se){
-            LOGGER.warn(se.getMessage());
-        }
-        return false;
-    }
-    
-    
 }

@@ -3,25 +3,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.solvd.dao.IUserDAO">
-    <resultMap type = "com.solvd.bin.user.User" id = "UserResultMap" autoMapping="false"/>
+    <resultMap type = "com.solvd.bin.user.User" id = "UserResultMap" autoMapping="false">
         <id column = "user_id" property = "id"/>
         <result column = "user_username" property = "name"/>
         <result column = "user_email" property = "email"/>
-        <association property = "language" resultMap = "com.solv.dao.ILanguageDAO.LanguagesResultMap"/>
-        <association property = "address" resultMap = "com.solv.dao.IAddressDAO.AddressResultMap"/>
+        <result column = "user_pass" property = "pass"/>
+        <association property = "language" resultMap = "com.solvd.dao.ILanguageDAO.LanguagesResultMap"/>
+        <association property = "address" resultMap = "com.solvd.dao.IAddressDAO.AddressResultMap"/>
     </resultMap>
 
-    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
-        <![CDATA[insert into user (username, pass, email) values (#{username}, #{pass}, #{email})]]>
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id" parameterType="com.solvd.bin.user.User">
+        insert into user
+            (username, pass, email, id_language)
+        values 
+            (#{name}, #{pass}, #{email}, #{language.id})
     </insert>
-    <update id = "updateEntity">
-        <![CDATA[update user set username = #{username}, pass = #{pass}, email = #{email} where id = #{id};]]>
+    <update id = "updateEntity" parameterType="com.solvd.bin.user.User">
+        update user set
+            username = #{name},
+            pass = #{pass}, 
+            email = #{email}, 
+            id_language = #{language.id}, 
+            id_address = #{address.id} 
+        where id = #{id};
     </update>
     <delete id="deleteEntityById">
-        <![CDATA[delete from user where id = #{id}]]>
+        delete from user where id = #{id}
     </delete>
-    <select id = "getEntityById">
-        <![CDATA[
+    <select id = "getEntityById" resultMap="UserResultMap">
             select 
                 u.id as user_id,
                 u.username as user_username,
@@ -40,7 +49,30 @@
                 left outer join address a on u.id_address = a.id
                 left outer join city c on a.id_city = c.id
                 left outer join country p on c.id_country = p.id
-            where u.id = 1
-        ]]>
+            where u.id = #{id}
     </select>
+
+    <select id="getUserByUsername" resultMap="UserResultMap">
+            select 
+                u.id as user_id,
+                u.username as user_username,
+                u.email as user_email,
+                u.pass as user_pass,
+                l.id as language_id,
+                l.name as language_name,
+                a.id as address_id,
+                a.address as address,
+                c.id as city_id,
+                c.name as city_name,
+                p.id as country_id,
+                p.name as country_name,
+                p.priceMultiplier as priceMultiplier
+            from user u 
+                left outer join language l on u.id_language = l.id
+                left outer join address a on u.id_address = a.id
+                left outer join city c on a.id_city = c.id
+                left outer join country p on c.id_country = p.id
+            where u.username = #{username}
+    </select>
+
 </mapper>

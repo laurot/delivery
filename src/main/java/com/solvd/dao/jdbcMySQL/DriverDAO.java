@@ -38,6 +38,7 @@ public class DriverDAO implements IDriverDAO{
         try(Connection con = DBCPDataSource.getConnection()){
             PreparedStatement ps = con.prepareStatement("SELECT id,id_user,MAX(rating),free FROM driver WHERE free = 1 GROUP BY id");
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 Driver driver = new Driver();
                 driver.setId(rs.getLong("id"));

@@ -22,6 +22,7 @@ public class DeliveryDAO implements IDeliveryDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM delivery WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 Delivery c = new Delivery();
                 c.setId(id);
@@ -49,6 +50,7 @@ public class DeliveryDAO implements IDeliveryDAO{
             ps.setLong(2, entity.getStore().getId());
             ps.setLong(3, entity.getUser().getId());
             int affectedRows = ps.executeUpdate();
+           
             if(affectedRows == 0) throw new SQLException("Saving delivery failed");
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {

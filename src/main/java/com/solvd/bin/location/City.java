@@ -11,7 +11,11 @@ public class City {
     private String name;
     @XmlElement(name = "country")
     private Country country;
-    
+    public City(){}
+    public City(int id){
+        this.id = id;
+        this.country = new Country(1);
+    }
     public Country getCountry() {
         return country;
     }

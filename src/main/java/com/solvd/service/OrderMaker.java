@@ -2,7 +2,6 @@ package com.solvd.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import com.solvd.bin.orders.*;
 import com.solvd.bin.stores.Inventory;
 import com.solvd.bin.stores.Store;
@@ -13,12 +12,11 @@ import com.solvd.dao.IStoreDAO;
 import com.solvd.dao.jdbcMySQL.DriverDAO;
 import com.solvd.dao.jdbcMySQL.InventoryDAO;
 import com.solvd.dao.jdbcMySQL.StoreDAO;
-
+import com.solvd.util.Input;
 import org.apache.logging.log4j.*;
 
 public class OrderMaker {
     
-    private Scanner sc = new Scanner(System.in);
     private static final Logger Log = LogManager.getLogger();
     private IDriverDAO driverDAO = new DriverDAO();
     private IStoreDAO storeDAO = new StoreDAO();
@@ -36,7 +34,7 @@ public class OrderMaker {
             Log.info(i+". " + store.getName() + " Address: " + store.getAddress().getAddress());
             i++;
         }
-        int choice = sc.nextInt();
+        int choice = Input.getInput().sc.nextInt();
         Store store = stores.get(choice - 1);
         order.setStore(store);
         List<DeliveryProducts> cart = makeCart(store);
@@ -52,7 +50,7 @@ public class OrderMaker {
         total = total * user.getAddress().getCity().getCountry().getPriceMult();
         Log.info("Total price: $" + total);
         Log.info("Insert 1 to accept");
-        choice = sc.nextInt();
+        choice = Input.getInput().sc.nextInt();
         if (choice == 1) return order;
         return null;
     }
@@ -70,7 +68,7 @@ public class OrderMaker {
                 product.getProduct().getPrice() * store.getAddress().getCity().getCountry().getPriceMult());
             i++;
         }
-        int choice = sc.nextInt();
+        int choice = Input.getInput().sc.nextInt();
 
         if (choice == 0){
             if(cart.isEmpty()) return null;
@@ -78,7 +76,7 @@ public class OrderMaker {
         }
 
         Log.info("How many?");
-        int amount = sc.nextInt();
+        int amount = Input.getInput().sc.nextInt();
         DeliveryProducts item = new DeliveryProducts(stock.get(choice-1).getProduct(), amount);
         cart.add(item);
         }while(true);

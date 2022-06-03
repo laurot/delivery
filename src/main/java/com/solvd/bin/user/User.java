@@ -12,6 +12,8 @@ public class User {
     private long id;
     @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "pass")
+    private String pass;
     @XmlElement(name = "email")
     private String email;
     @XmlElement(name = "language")
@@ -58,5 +60,11 @@ public class User {
     }
     public void setAddress(Address address) {
         this.address = address;
+    }
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    public String getPass() {
+        return pass;
     }
 }

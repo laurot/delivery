@@ -5,34 +5,22 @@ import com.solvd.bin.user.User;
 import com.solvd.dao.IInventoryDAO;
 import com.solvd.dao.IUserDAO;
 import com.solvd.dao.jdbcMySQL.InventoryDAO;
-import com.solvd.dao.jdbcMySQL.UserDAO;
+import com.solvd.dao.mybatisDAO.UserDAO;
 import com.solvd.service.JacksonStuff;
+import com.solvd.service.Resgister;
 import com.solvd.service.UserMenu;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.solvd.util.Input;
 import org.apache.logging.log4j.*;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class App 
 {
     private static final Logger Log = LogManager.getLogger();
-    private static Scanner sc = new Scanner(System.in);
     public static void main( String[] args )
     {
-        try (Reader r = Resources.getResourceAsReader("mybatis-config.xml")) {
-            SqlSessionFactory s = new SqlSessionFactoryBuilder().build(r);
-            IUserDAO UserDAO = s.openSession().getMapper(IUserDAO.class);
-            Log.info(UserDAO.getEntityById(1).getName());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        //jacksonMethod();
+
+        jacksonMethod();
 
         Log.info("Menu:");
         Log.info("1.User login");
@@ -41,31 +29,32 @@ public class App
         Log.info("4.Register");
         Log.info("0.Exit");
         Log.info("----------------------------------------------");
-        int choice = sc.nextInt();
+        int choice = Input.getInput().sc.nextInt();
+        Input.getInput().sc.nextLine();
         switch (choice) {
             case 1:
                 Log.info("Login:");
                 Log.info("insert username:");
-                sc.nextLine();
-                String username = sc.nextLine();
+                String username = Input.getInput().sc.nextLine();
                 Log.info("----------------------------------------------");
                 IUserDAO userDAO = new UserDAO();
-                User user = userDAO.getUserByUsername(username);            //If empty, later use will cause NullPointerException
-                if(user != null){
-                    Log.info("insert password:");
-                    if(userDAO.authenticate(user, sc.nextLine())){   
-                        UserMenu uMenu = new UserMenu();
-                        uMenu.uMenu(user);
-                        Log.info("Session closed successfully");
-                    }else Log.info("invalid password");
-                    Log.info("----------------------------------------------");
-                }else Log.warn("User doesn't exist");
+                Log.info("insert password:");
+                User user = userDAO.getUserByUsername(username);
+                if(user.getPass().equals(Input.getInput().sc.nextLine())){   
+                    UserMenu uMenu = new UserMenu();
+                    uMenu.uMenu(user);
+                    Log.info("Session closed successfully");
+                }else Log.info("Account doesn't exist");
+                Log.info("----------------------------------------------");
+
                 break;
             case 2:
                 break;
             case 3:
                 break;
             case 4:
+                Resgister re = new Resgister();
+                re.createUser();
                 break;
             default:
                 break;

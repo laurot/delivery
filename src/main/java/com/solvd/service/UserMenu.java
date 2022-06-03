@@ -1,20 +1,20 @@
 package com.solvd.service;
 
-import java.util.Scanner;
-
+import com.solvd.bin.location.Address;
 import com.solvd.bin.orders.Delivery;
 import com.solvd.bin.user.User;
+import com.solvd.dao.IUserDAO;
 import com.solvd.dao.jdbcMySQL.DeliveryDAO;
-
+import com.solvd.util.Input;
 import org.apache.logging.log4j.*;
 
 public class UserMenu {
     
     
-    private static Scanner sc = new Scanner(System.in);
     private static final Logger Log = LogManager.getLogger();
     private OrderMaker orderMaker = new OrderMaker();
     private DeliveryDAO deliveryDAO = new DeliveryDAO();
+    private IUserDAO userDAO = new com.solvd.dao.mybatisDAO.UserDAO();
 
     public void uMenu(User user){
 
@@ -23,10 +23,11 @@ public class UserMenu {
         Log.info("2.Check Orders");
         Log.info("3.Change Address");
         Log.info("4.Add Pay method");
-        Log.info("5.Change Language");
+        Log.info("5.Change email");
         Log.info("0.Exit");
         Log.info("----------------------------------------------");
-        int choice = sc.nextInt();
+        int choice = Input.getInput().sc.nextInt();
+        Input.getInput().sc.nextLine();
         switch (choice) {
             case 1:
                 Delivery order = orderMaker.makeOrder(user);
@@ -43,13 +44,16 @@ public class UserMenu {
                 //JaxBStuff.setDelivery(deliveryDAO.getEntityById(1));;
                 break;
             case 3:
-                
+                Log.info("New address:");
+                user.setAddress(new Address(Input.getInput().sc.nextLine()));
                 break;
             case 4:
                 
                 break;
             case 5:
-
+                Log.info("New email:");
+                user.setEmail(Input.getInput().sc.nextLine());
+                userDAO.updateEntity(user);
                 break;
             default:
                 break;

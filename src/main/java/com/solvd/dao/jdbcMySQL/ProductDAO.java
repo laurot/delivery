@@ -20,6 +20,7 @@ public class ProductDAO implements IProductDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM product WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             if(rs.next()){
                 Product b = new Product();
                 b.setId(id);

@@ -45,6 +45,7 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
                 ps.setLong(2, entity.getProduct().getId());
                 ps.setLong(3, entity.getAmount());
                 ps.executeUpdate();
+               
             }catch(SQLException se){
                 LOGGER.warn(se.getMessage());
             }
@@ -57,6 +58,7 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
             PreparedStatement ps = con.prepareStatement("SELECT * FROM deliveryproduct WHERE id_currentDelivery = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
+           
             List<DeliveryProducts> list = new ArrayList<DeliveryProducts>();
 
             while(rs.next()){
