@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.dao.IInventoryDAO">
+    <resultMap type = "com.solvd.bin.stores.Inventory" id = "InventoryResultMap" autoMapping="false">
+        <result column = "inventory_amount" property = "amount"/>
+        <association property = "product" resultMap = "com.solvd.dao.IProductDAO.ProductResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+        
+    </insert>
+    <update id = "updateEntity">
+        
+    </update>
+    <delete id="deleteEntityById">
+        
+    </delete>
+    <select id = "getEntityById" resultMap="InventoryResultMap">
+    </select>
+
+    <select id = "getInventoryByStoreId" resultType="com.solvd.bin.stores.Inventory" resultMap="InventoryResultMap">
+        SELECT
+            i.amount as inventory_amount,
+            p.id as product_id,
+            p.name as product_name,
+            p.price as product_price,
+            b.id as brand_id,
+            b.name as brand_name
+        FROM inventory i
+            left join product p on i.id_product = p.id
+            left join brand b on p.id_brand = b.id
+        WHERE i.id_store = #{id}
+    </select>
+</mapper>

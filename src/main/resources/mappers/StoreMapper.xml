@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.dao.IStoreDAO">
+    <resultMap type = "com.solvd.bin.stores.Store" id = "StoreResultMap" autoMapping="false">
+        <id column = "store_id" property = "id"/>
+        <result column = "store_name" property = "name"/>
+        <association property = "address" resultMap = "com.solvd.dao.IAddressDAO.AddressResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+        
+    </insert>
+    <update id = "updateEntity">
+        
+    </update>
+    <delete id="deleteEntityById">
+        
+    </delete>
+    <select id = "getEntityById" resultMap="StoreResultMap">
+        select 
+            id as language_id,
+            name as language_name
+        from language 
+            where id = #{id}
+    </select>
+
+    <select id="getStoresByCityId" resultType="com.solvd.bin.stores.Store" resultMap = "StoreResultMap">
+        SELECT
+            s.id as store_id,
+            s.name as store_name,
+            a.id as address_id,
+            a.address as address,
+            p.priceMultiplier as priceMultiplier
+        FROM store s
+            left join address a on s.id_address = a.id
+            left join city c on a.id_city = c.id
+            left join country p on c.id_country = p.id
+        WHERE a.id_city = #{id}
+    </select>
+</mapper>

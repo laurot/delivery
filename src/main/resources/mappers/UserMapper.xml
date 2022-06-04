@@ -45,10 +45,10 @@
                 p.name as country_name,
                 p.priceMultiplier as priceMultiplier
             from user u 
-                left outer join language l on u.id_language = l.id
-                left outer join address a on u.id_address = a.id
-                left outer join city c on a.id_city = c.id
-                left outer join country p on c.id_country = p.id
+                left join language l on u.id_language = l.id
+                left join address a on u.id_address = a.id
+                left join city c on a.id_city = c.id
+                left join country p on c.id_country = p.id
             where u.id = #{id}
     </select>
 

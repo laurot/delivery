@@ -15,22 +15,19 @@ public class SessionGetter {
     private static final SessionGetter instance = new SessionGetter();
     private SqlSession session;
 
-    private SessionGetter(){
-        if (session == null){
-            try (Reader r = Resources.getResourceAsReader("mybatis-config.xml")) {
-                SqlSessionFactory s = new SqlSessionFactoryBuilder().build(r);
-                session = s.openSession();
-            } catch (IOException e) {
-                Log.error(e.getMessage());
-            }
-        }
-    }
+    private SessionGetter(){}
 
     public static SessionGetter getInstance(){
         return instance;
     }
     
     public SqlSession getSession(){
+        try (Reader r = Resources.getResourceAsReader("mybatis-config.xml")) {
+            SqlSessionFactory s = new SqlSessionFactoryBuilder().build(r);
+            session = s.openSession();
+        } catch (IOException e) {
+            Log.error(e.getMessage());
+        }
         return session;
     }
 }

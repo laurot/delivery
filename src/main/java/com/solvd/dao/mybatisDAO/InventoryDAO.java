@@ -4,25 +4,25 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.solvd.bin.stores.Store;
-import com.solvd.dao.IStoreDAO;
+import com.solvd.bin.stores.Inventory;
+import com.solvd.dao.IInventoryDAO;
 import com.solvd.util.SessionGetter;
 
-public class StoreDAO implements IStoreDAO{
+public class InventoryDAO implements IInventoryDAO{
 
     @Override
-    public Store getEntityById(long id) {
+    public Inventory getEntityById(long id) {
         throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
-    public void saveEntity(Store entity) {
+    public void saveEntity(Inventory entity) {
         throw new UnsupportedOperationException("This method shoould be implemented");
         
     }
 
     @Override
-    public void updateEntity(Store entity) {
+    public void updateEntity(Inventory entity) {
         throw new UnsupportedOperationException("This method shoould be implemented");
         
     }
@@ -34,10 +34,10 @@ public class StoreDAO implements IStoreDAO{
     }
 
     @Override
-    public List<Store> getStoresByCityId(long id) {
+    public List<Inventory> getInventoryByStoreId(Long id) {
         try (SqlSession session = SessionGetter.getInstance().getSession()) {
-            IStoreDAO storeDAO = session.getMapper(IStoreDAO.class);
-            return storeDAO.getStoresByCityId(id);
+            IInventoryDAO inventoryDAO = session.getMapper(IInventoryDAO.class);
+            return inventoryDAO.getInventoryByStoreId(id);
         }
     }
     

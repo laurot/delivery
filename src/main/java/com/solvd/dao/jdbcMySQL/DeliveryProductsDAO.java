@@ -37,11 +37,11 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
     }
 
     @Override
-    public void saveOrder(List<DeliveryProducts> order, long idDelivery) {
+    public void saveOrder(List<DeliveryProducts> order) {
         order.stream().forEach((entity)-> {
             try(Connection con = DBCPDataSource.getConnection()){
                 PreparedStatement ps = con.prepareStatement("INSERT INTO deliveryproduct VALUES (?,?,?);");
-                ps.setLong(1, idDelivery);
+                ps.setLong(1, entity.getDeliveryId());
                 ps.setLong(2, entity.getProduct().getId());
                 ps.setLong(3, entity.getAmount());
                 ps.executeUpdate();

@@ -30,7 +30,6 @@ public class DeliveryDAO implements IDeliveryDAO{
                 c.setDriver(driverDAO.getEntityById(rs.getLong("id_driver")));
                 c.setStore(storeDAO.getEntityById(rs.getLong("id_store")));
                 c.setDateTime(rs.getDate("timeCreated"));
-                c.setCart(deliveryProductsDAO.getOrderByDeliveryId(rs.getLong("id")));
 
                 return c;
             }
@@ -54,7 +53,7 @@ public class DeliveryDAO implements IDeliveryDAO{
             if(affectedRows == 0) throw new SQLException("Saving delivery failed");
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
-                deliveryProductsDAO.saveOrder(entity.getCart(), generatedKeys.getLong(1));
+                deliveryProductsDAO.saveOrder(entity.getCart());
             }
         }catch(SQLException  se){
             LOGGER.warn(se.getMessage());

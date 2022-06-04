@@ -1,43 +1,38 @@
 package com.solvd.dao.mybatisDAO;
 
-import java.util.List;
+import com.solvd.bin.user.Driver;
+import com.solvd.dao.IDriverDAO;
+import com.solvd.util.SessionGetter;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.solvd.bin.stores.Store;
-import com.solvd.dao.IStoreDAO;
-import com.solvd.util.SessionGetter;
-
-public class StoreDAO implements IStoreDAO{
+public class DriverDAO implements IDriverDAO{
 
     @Override
-    public Store getEntityById(long id) {
+    public Driver getEntityById(long id) {
         throw new UnsupportedOperationException("This method shoould be implemented");
     }
 
     @Override
-    public void saveEntity(Store entity) {
+    public void saveEntity(Driver entity) {
         throw new UnsupportedOperationException("This method shoould be implemented");
-        
     }
 
     @Override
-    public void updateEntity(Store entity) {
+    public void updateEntity(Driver entity) {
         throw new UnsupportedOperationException("This method shoould be implemented");
-        
     }
 
     @Override
     public void deleteEntityById(long id) {
         throw new UnsupportedOperationException("This method shoould be implemented");
-        
     }
 
     @Override
-    public List<Store> getStoresByCityId(long id) {
+    public Driver getFreeDriver() {
         try (SqlSession session = SessionGetter.getInstance().getSession()) {
-            IStoreDAO storeDAO = session.getMapper(IStoreDAO.class);
-            return storeDAO.getStoresByCityId(id);
+            IDriverDAO driverDAO = session.getMapper(IDriverDAO.class);
+            return driverDAO.getFreeDriver();
         }
     }
     

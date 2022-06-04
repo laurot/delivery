@@ -4,27 +4,34 @@ import com.solvd.bin.user.User;
 import com.solvd.dao.IUserDAO;
 import com.solvd.util.SessionGetter;
 
+import org.apache.ibatis.session.SqlSession;
+
 public class UserDAO implements IUserDAO{
 
     @Override
     public User getEntityById(long id) {
-        IUserDAO userDAO = SessionGetter.getInstance().getSession().getMapper(IUserDAO.class);
-        User user = userDAO.getEntityById(id);
-        return user;
+        try (SqlSession session = SessionGetter.getInstance().getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            return userDAO.getEntityById(id);
+        }
     }
 
     @Override
     public void saveEntity(User entity) {
-        IUserDAO userDAO = SessionGetter.getInstance().getSession().getMapper(IUserDAO.class);
-        userDAO.saveEntity(entity);
-        SessionGetter.getInstance().getSession().commit();
+        try (SqlSession session = SessionGetter.getInstance().getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            userDAO.saveEntity(entity);
+            session.commit();
+        }
     }
 
     @Override
     public void updateEntity(User entity) {
-        IUserDAO userDAO = SessionGetter.getInstance().getSession().getMapper(IUserDAO.class);
-        userDAO.updateEntity(entity);
-        SessionGetter.getInstance().getSession().commit();
+        try (SqlSession session = SessionGetter.getInstance().getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            userDAO.updateEntity(entity);
+            session.commit();
+        }
     }
 
     @Override
@@ -35,8 +42,9 @@ public class UserDAO implements IUserDAO{
 
     @Override
     public User getUserByUsername(String username) {
-        IUserDAO userDAO = SessionGetter.getInstance().getSession().getMapper(IUserDAO.class);
-        User user = userDAO.getUserByUsername(username);
-        return user;
+        try (SqlSession session = SessionGetter.getInstance().getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            return userDAO.getUserByUsername(username);
+        }
     } 
 }

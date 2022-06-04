@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.dao.IDeliveryDAO">
+    <resultMap type = "com.solvd.bin.orders.Delivery" id = "DeliveryResultMap" autoMapping="false">
+        <id column = "delivery_id" property = "id"/>
+        <result column = "delivery_date" property = "dateTime"/>
+        <association property = "driver" resultMap = "com.solvd.dao.IDriverDAO.DriverResultMap"/>
+        <association property = "store" resultMap = "com.solvd.dao.IStoreDAO.StoreResultMap"/>
+        <association property = "user" resultMap = "com.solvd.dao.IUserDAO.UserResultMap"/>
+    </resultMap>
+
+    <select id = "getEntityById" resultMap="DeliveryResultMap">
+        select 
+            de.id as delivery_id,
+            de.date as delivery_date,
+            dr.id as driver_id,
+            s.id as store_id,
+            s.name as store_name,
+            u.id as user_id,
+            u.username as user_username
+        from delivery de
+            left join driver dr on de.id_driver = dr.id
+            left join store s on de.id_store = s.id
+            left join user u on de.id_user = u.id
+        where de.id = #{id}
+    </select>
+
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id" parameterType="com.solvd.bin.orders.Delivery">
+        insert into delivery 
+            (id_store, id_user, id_driver)
+        values
+            (#{store.id},#{user.id},#{driver.id})
+    </insert>
+</mapper>

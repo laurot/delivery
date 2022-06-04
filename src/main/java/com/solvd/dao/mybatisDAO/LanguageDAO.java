@@ -5,12 +5,16 @@ import com.solvd.bin.Languages;
 import com.solvd.dao.ILanguageDAO;
 import com.solvd.util.SessionGetter;
 
+import org.apache.ibatis.session.SqlSession;
+
 public class LanguageDAO implements ILanguageDAO{
 
     @Override
     public Languages getEntityById(long id) {
-        ILanguageDAO languageDAO = SessionGetter.getInstance().getSession().getMapper(ILanguageDAO.class);
+        try (SqlSession session = SessionGetter.getInstance().getSession()) {
+        ILanguageDAO languageDAO = session.getMapper(ILanguageDAO.class);
         return languageDAO.getEntityById(id);
+        }
     }
 
     @Override
@@ -30,8 +34,10 @@ public class LanguageDAO implements ILanguageDAO{
 
     @Override
     public List<Languages> getLanguages() {
-        ILanguageDAO languageDAO = SessionGetter.getInstance().getSession().getMapper(ILanguageDAO.class);
+        try (SqlSession session = SessionGetter.getInstance().getSession()) {
+        ILanguageDAO languageDAO = session.getMapper(ILanguageDAO.class);
         return languageDAO.getLanguages();
+        }
     }
     
 }

@@ -1,0 +1,45 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.dao.IDriverDAO">
+    <resultMap type = "com.solvd.bin.user.Driver" id = "DriverResultMap" autoMapping="false">
+        <id column = "driver_id" property = "id"/>
+        <result column = "driver_rating" property = "rating"/>
+        <result column = "free" property = "free"/>
+        <association property = "user" resultMap = "com.solvd.dao.IUserDAO.UserResultMap"/>
+    </resultMap>
+
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+        
+    </insert>
+    <update id = "updateEntity">
+        
+    </update>
+    <delete id="deleteEntityById">
+        
+    </delete>
+    <select id = "getEntityById" resultMap="DriverResultMap">
+        select 
+            d.id as driver_id,
+            d.rating as driver_rating,
+            d.free as free,
+            u.id as user_id,
+            u.username as user_username,
+        from driver d   
+            left join user u on d.id_user = u.id 
+        where d.id = #{id}
+    </select>
+
+    <select id = "getFreeDriver" resultType="com.solvd.bin.user.Driver" resultMap="DriverResultMap">
+        select 
+            d.id as driver_id,
+            MAX(d.rating) as driver_rating,
+            d.free as free,
+            u.id as user_id,
+            u.username as user_username
+        from driver d   
+            left join user u on d.id_user = u.id 
+        where d.free = 1
+    </select>
+</mapper>

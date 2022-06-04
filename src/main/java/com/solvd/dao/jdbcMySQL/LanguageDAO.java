@@ -1,6 +1,7 @@
 package com.solvd.dao.jdbcMySQL;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.solvd.bin.Languages;
@@ -49,7 +50,21 @@ public class LanguageDAO implements ILanguageDAO{
 
     @Override
     public List<Languages> getLanguages() {
-        throw new UnsupportedOperationException("This method shoould be implemented");
+        try(Connection con = DBCPDataSource.getConnection()){
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM language");
+            ResultSet rs = ps.executeQuery();
+            List<Languages> languages = new ArrayList<Languages>();
+            while(rs.next()){
+                Languages u = new Languages();
+                u.setId(rs.getLong("id"));
+                u.setName(rs.getString("name"));
+                languages.add(u);
+            }
+            return languages;
+        }catch(SQLException se){
+            LOGGER.warn(se.getMessage());
+        }
+        return null;
     }
     
 }

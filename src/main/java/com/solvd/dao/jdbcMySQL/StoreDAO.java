@@ -2,7 +2,6 @@ package com.solvd.dao.jdbcMySQL;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.solvd.bin.location.City;
 import com.solvd.bin.stores.Store;
 import com.solvd.dao.IStoreDAO;
 import com.solvd.util.DBCPDataSource;
@@ -36,11 +35,11 @@ public class StoreDAO implements IStoreDAO{
     }
 
     @Override
-    public List<Store> getStoresByCity(City city) {
+    public List<Store> getStoresByCityId(long id) {
         try(Connection con = DBCPDataSource.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                 "SELECT s.* FROM store s join address a on a.id = s.id_address WHERE a.id_city = ?");
-            ps.setLong(1, city.getId());
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
            
             List<Store> stores = new ArrayList<Store>();

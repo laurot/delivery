@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.dao.IDeliveryProductsDAO">
+    <resultMap type = "com.solvd.bin.orders.DeliveryProducts" id = "DeliveryProductResultMap" autoMapping="false">
+        <result column = "delivery_id" property = "deliveryId"/>
+        <result column = "order_amount" property = "amount"/>
+        <association property = "product" resultMap = "com.solvd.dao.IProductDAO.ProductResultMap"/>
+    </resultMap>
+
+    <select id = "getOrderByDeliveryId" resultMap="DeliveryProductResultMap">
+        select 
+            o.id_currentDelivery as delivery_id,
+            o.amount as order_amount,
+            p.id as product_id,
+            p.name as product_name,
+            p.price as product_price,
+            b.id as brand_id,
+            b.name as brand_name
+        from deliveryproduct o
+            left join product p on o.id_product = p.id
+            left join brand b on p.id_brand = b.id
+        where o.id_delivery = #{id}
+    </select>
+
+    <insert id="saveEntity" parameterType="com.solvd.bin.orders.DeliveryProducts">
+        insert into deliveryproduct 
+            (id_currentDelivery, id_product, amount)
+        values
+            (#{deliveryId},#{product.id},#{amount})
+    </insert>
+</mapper>

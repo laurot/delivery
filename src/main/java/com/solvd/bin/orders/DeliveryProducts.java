@@ -7,6 +7,8 @@ import com.solvd.bin.stores.Product;
 @XmlRootElement(name = "deliveryProducts")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DeliveryProducts {
+    @XmlElement(name="deliveryId")
+    private long deliveryId;
     @XmlElement(name = "product")
     private Product product;
     @XmlElement(name = "amount")
@@ -36,5 +38,11 @@ public class DeliveryProducts {
     @Override
     public boolean equals(Object obj) {
         return true;
+    }
+    public long getDeliveryId() {
+        return deliveryId;
+    }
+    public void setDeliveryId(long deliveryId) {
+        this.deliveryId = deliveryId;
     }
 }

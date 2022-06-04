@@ -18,5 +18,12 @@
     <mapper resource = "mappers/AddressMapper.xml"/>
     <mapper resource = "mappers/CountryMapper.xml"/>
     <mapper resource = "mappers/LanguageMapper.xml"/>
+    <mapper resource = "mappers/DriverMapper.xml"/>
+    <mapper resource = "mappers/StoreMapper.xml"/>
+    <mapper resource = "mappers/InventoryMapper.xml"/>
+    <mapper resource = "mappers/ProductMapper.xml"/>
+    <mapper resource = "mappers/BrandMapper.xml"/>
+    <mapper resource = "mappers/DeliveryMapper.xml"/>
+    <mapper resource = "mappers/DeliveryProductMapper.xml"/>
   </mappers>
 </configuration>
