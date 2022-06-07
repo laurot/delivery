@@ -64,15 +64,26 @@ delete from brand where id = 7;
 
 -- JOINS, HAVING, GROUP BY
 
-select s.* from store s join address a on a.id = s.id_address where a.id_city = 1;
-select p.id, p.name, avg(price), i.amount from product p join inventory i on p.id = i.id_product group by p.id having avg(price) > 100;
+                -- INNER JOIN, 2 GROUP BY
+select * from address a inner join user u on u.id_address = a.id;
+select * from address a inner join store s on s.id_address = a.id;
+select count(p.id) as amount, b.name as brand from brand b inner join product p on b.id = p.id_brand group by b.name;
+select count(u.id) as amount, l.name as language from user u inner join language l on u.id_language = l.id group by l.name;
+select * from driver d inner join user u on d.id_user = u.id;
+
+                -- LEFT JOIN, 3 HAVING, 1 GROUP BY
+select s.* from store s left join address a on a.id = s.id_address where a.id_city = 1;
+select p.id, p.name, avg(price), i.amount from product p left join inventory i on p.id = i.id_product group by p.id having avg(price) > 100;
 select u.id, u.username, d.rating, d.free from driver d left join user u on d.id_user = u.id;
-select u.id, u.username, a.address from address a right join user u on u.id_address = a.id;
+select p.id, p.name as product, i.amount from inventory i left join product p on i.id_product = p.id having amount > 10;
+select d.id_currentDelivery, p.name as product, d.amount from deliveryproduct d left join product p on d.id_product = p.id having amount > 10;
 
-
-
-
-
+                -- RIGHT JOIN, 2 HAVING, 2 GROUP BY
+select d.id_currentDelivery, p.name as product, d.amount from product p right join deliveryproduct d on d.id_product = p.id having amount > 10;
+select d.id_currentDelivery, p.name as product, d.amount from product p right join deliveryproduct d on d.id_product = p.id group by d.id_currentDelivery;
+select d.id as deliveryId, u.username, count(d.id) as deliveryAmount from delivery d right join user u on d.id_user = u.id group by u.id having count(d.id)>2;
+select u.id, u.username, d.free as isFree, d.rating from user u right join driver d on u.id = d.id_user;
+select co.name, c.name, co.priceMultiplier from country co right join city c on co.id = c.id_country;
 
 
 

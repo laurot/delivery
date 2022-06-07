@@ -1,17 +1,19 @@
 package com.solvd.service.daoServices;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.solvd.bin.user.Driver;
 import com.solvd.dao.IDriverDAO;
-import com.solvd.dao.mybatisDAO.DriverDAO;
 import com.solvd.service.interfaces.IDriverServices;
 
-public class DriverServices implements IDriverServices{
-    
-    private IDriverDAO driverDAO = new DriverDAO();
+public class DriverServices extends Services implements IDriverServices{
     
     @Override
     public Driver getFreeDriver() {
-        return driverDAO.getFreeDriver();
+        try (SqlSession session = getSession()) {
+            IDriverDAO driverDAO = session.getMapper(IDriverDAO.class);
+            return driverDAO.getFreeDriver();
+        }
     }
     
 }

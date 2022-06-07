@@ -3,7 +3,7 @@ package com.solvd.service;
 import com.solvd.bin.location.Address;
 import com.solvd.bin.orders.Delivery;
 import com.solvd.bin.user.User;
-import com.solvd.dao.IUserDAO;
+import com.solvd.service.daoServices.UserServices;
 import com.solvd.util.Input;
 import org.apache.logging.log4j.*;
 //import com.solvd.dao.jdbcMySQL.DeliveryDAO;
@@ -12,9 +12,9 @@ public class UserMenu {
     
     private static final Logger Log = LogManager.getLogger();
     //private DeliveryDAO deliveryDAO = new DeliveryDAO();
-    private IUserDAO userDAO = new com.solvd.dao.mybatisDAO.UserDAO();
     private OrderMaker orderMaker = new OrderMaker();
-    
+    private UserServices userServices = new UserServices(); 
+
     public void uMenu(User user){
         Log.info("Menu:");
         Log.info("1.Make order");
@@ -46,7 +46,7 @@ public class UserMenu {
             case 5:
                 Log.info("New email:");
                 user.setEmail(Input.getInput().sc.nextLine());
-                userDAO.updateEntity(user);
+                userServices.updateUser(user);
                 break;
             default:
                 break;
