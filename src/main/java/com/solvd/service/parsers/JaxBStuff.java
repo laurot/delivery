@@ -1,4 +1,4 @@
-package com.solvd.service;
+package com.solvd.service.parsers;
 
 import java.io.File;
 

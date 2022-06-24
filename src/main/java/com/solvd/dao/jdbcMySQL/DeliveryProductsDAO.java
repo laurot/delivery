@@ -39,8 +39,9 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
     @Override
     public void saveOrder(List<DeliveryProducts> order) {
         order.stream().forEach((entity)-> {
+            PreparedStatement ps = null;
             try(Connection con = DBCPDataSource.getConnection()){
-                PreparedStatement ps = con.prepareStatement("INSERT INTO deliveryproduct VALUES (?,?,?);");
+                ps = con.prepareStatement("INSERT INTO deliveryproduct VALUES (?,?,?);");
                 ps.setLong(1, entity.getDeliveryId());
                 ps.setLong(2, entity.getProduct().getId());
                 ps.setLong(3, entity.getAmount());
@@ -48,19 +49,26 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
                
             }catch(SQLException se){
                 LOGGER.warn(se.getMessage());
+            }finally {
+                if (ps != null) {
+                    try {
+                        ps.close();
+                    } catch (SQLException e) {
+                        LOGGER.error("Error in SQL", e);
+                    }
+                }
             }
         });
     }
 
     @Override
-    public List<DeliveryProducts> getOrderByDeliveryId(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM deliveryproduct WHERE id_currentDelivery = ?");
+    public List<DeliveryProducts> getOrderByDeliveryId(long id) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM deliveryproduct WHERE id_currentDelivery = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
-           
             List<DeliveryProducts> list = new ArrayList<DeliveryProducts>();
-
             while(rs.next()){
                 DeliveryProducts c = new DeliveryProducts();
                 c.setAmount(rs.getInt("amount"));
@@ -70,6 +78,14 @@ public class DeliveryProductsDAO implements IDeliveryProductsDAO{
             return list;
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

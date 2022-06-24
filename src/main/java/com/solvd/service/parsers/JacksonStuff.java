@@ -1,4 +1,4 @@
-package com.solvd.service;
+package com.solvd.service.parsers;
 
 import java.util.List;
 import com.fasterxml.jackson.databind.JavaType;

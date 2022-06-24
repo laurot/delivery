@@ -1,4 +1,4 @@
-package com.solvd.service.interfaces;
+package com.solvd.service;
 
 import java.util.List;
 import com.solvd.bin.orders.DeliveryProducts;

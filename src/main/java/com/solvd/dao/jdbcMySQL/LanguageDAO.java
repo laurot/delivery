@@ -15,9 +15,8 @@ public class LanguageDAO implements ILanguageDAO{
     private Logger LOGGER = LogManager.getLogger();
     
     @Override
-    public Languages getEntityById(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM language WHERE id = ?");
+    public Languages getEntityById(long id) {        PreparedStatement ps = null;
+try(Connection con = DBCPDataSource.getConnection()){ ps = con.prepareStatement("SELECT * FROM language WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
            
@@ -49,9 +48,10 @@ public class LanguageDAO implements ILanguageDAO{
     }
 
     @Override
-    public List<Languages> getLanguages() {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM language");
+    public List<Languages> getLanguages() {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM language");
             ResultSet rs = ps.executeQuery();
             List<Languages> languages = new ArrayList<Languages>();
             while(rs.next()){
@@ -63,6 +63,14 @@ public class LanguageDAO implements ILanguageDAO{
             return languages;
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

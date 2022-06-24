@@ -1,4 +1,4 @@
-package com.solvd.service.daoServices;
+package com.solvd.service.myBatis;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.*;
 import com.solvd.bin.Languages;
 import com.solvd.dao.ILanguageDAO;
-import com.solvd.service.interfaces.ILanguageServices;
+import com.solvd.service.ILanguageServices;
 import com.solvd.util.Input;
 
 public class LanguageServices extends Services implements ILanguageServices{

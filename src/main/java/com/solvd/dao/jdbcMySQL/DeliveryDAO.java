@@ -17,12 +17,13 @@ public class DeliveryDAO implements IDeliveryDAO{
     private StoreDAO storeDAO = new StoreDAO();
 
     @Override
-    public Delivery getEntityById(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM delivery WHERE id = ?");
+    public Delivery getEntityById(long id) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM delivery WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
-           
+            ps.close();
             if(rs.next()){
                 Delivery c = new Delivery();
                 c.setId(id);
@@ -35,28 +36,45 @@ public class DeliveryDAO implements IDeliveryDAO{
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }
 
     @Override
-    public void saveEntity(Delivery entity) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement(
+    public void saveEntity(Delivery entity) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement(
                 "INSERT INTO delivery (id_driver, id_store, id_user) VALUES (?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, entity.getDriver().getId());
             ps.setLong(2, entity.getStore().getId());
             ps.setLong(3, entity.getUser().getId());
             int affectedRows = ps.executeUpdate();
-           
             if(affectedRows == 0) throw new SQLException("Saving delivery failed");
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 deliveryProductsDAO.saveOrder(entity.getCart());
             }
+            ps.close();
         }catch(SQLException  se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         
     }

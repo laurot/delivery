@@ -1,4 +1,4 @@
-package com.solvd.service.daoServices;
+package com.solvd.service.myBatis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.solvd.bin.orders.DeliveryProducts;
 import com.solvd.bin.stores.Inventory;
 import com.solvd.bin.stores.Store;
 import com.solvd.dao.IInventoryDAO;
-import com.solvd.service.interfaces.IInventoryServices;
+import com.solvd.service.IInventoryServices;
 import com.solvd.util.Input;
 
 public class InventoryServices extends Services implements IInventoryServices{

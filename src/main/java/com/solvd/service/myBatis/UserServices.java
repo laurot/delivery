@@ -1,73 +1,81 @@
-package com.solvd.service.jdbcServices;
+package com.solvd.service.myBatis;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.*;
 import com.solvd.bin.location.Address;
 import com.solvd.bin.orders.Delivery;
 import com.solvd.bin.orders.DeliveryProducts;
 import com.solvd.bin.stores.Store;
 import com.solvd.bin.user.User;
 import com.solvd.dao.IUserDAO;
-import com.solvd.dao.jdbcMySQL.UserDAO;
 import com.solvd.service.ILanguageServices;
 import com.solvd.service.IUserServices;
 import com.solvd.service.parsers.JaxBStuff;
 import com.solvd.util.Input;
 
-public class UserServices implements IUserServices{
+public class UserServices extends Services implements IUserServices{
 
-    private IUserDAO userDAO = new UserDAO();
     private static final Logger Log = LogManager.getLogger();
 
     @Override
     public void userLogin() {
-        Log.info("Login:");
-        Log.info("insert username:");
-        String username = Input.getInput().sc.nextLine();
-        Log.info("----------------------------------------------");
-        Log.info("insert password:");
-        User user = userDAO.getUserByUsername(username);
-        if(user.getPass().equals(Input.getInput().sc.nextLine())){  
-            uMenu(user);
-            Log.info("Session closed successfully");
-        }else Log.info("Account doesn't exist");
-        Log.info("----------------------------------------------");
-    }
-
-    @Override
-    public void createUser() {
-        ILanguageServices languageService = new LanguageServices();
-        User user = new User();
-        Log.info("username:");
-        user.setName(Input.getInput().sc.nextLine());
-        Log.info("password:");
-        user.setPass(Input.getInput().sc.nextLine());
-        Log.info("email:");
-        user.setEmail(Input.getInput().sc.nextLine());
-        user.setLanguage(languageService.selectLanguage());
-        Input.getInput().sc.nextLine();
-        userDAO.saveEntity(user);
-
-        Log.info("Is this a Driver or Employee?");
-        Log.info("1.No, just consumer");
-        Log.info("2.Driver");
-        Log.info("3.Employee");
-        int option = Input.getInput().sc.nextInt();
-        Input.getInput().sc.nextLine();
-        switch (option) {
-            case 2:
-
-                break;
-            case 3:
-
-                break;
+        try (SqlSession session = getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            Log.info("Login:");
+            Log.info("insert username:");
+            String username = Input.getInput().sc.nextLine();
+            Log.info("----------------------------------------------");
+            Log.info("insert password:");
+            User user = userDAO.getUserByUsername(username);
+            if(user.getPass().equals(Input.getInput().sc.nextLine())){   
+                uMenu(user);
+                Log.info("Session closed successfully");
+            }else Log.info("Account doesn't exist");
+            Log.info("----------------------------------------------");
         }
     }
     
-    //private DeliveryDAO deliveryDAO = new DeliveryDAO();
+    @Override
+    public void createUser(){
+        try (SqlSession session = getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            ILanguageServices languageService = new LanguageServices();
+            User user = new User();
+            Log.info("username:");
+            user.setName(Input.getInput().sc.nextLine());
+            Log.info("password:");
+            user.setPass(Input.getInput().sc.nextLine());
+            Log.info("email:");
+            user.setEmail(Input.getInput().sc.nextLine());
+            user.setLanguage(languageService.selectLanguage());
+            Input.getInput().sc.nextLine();
+            userDAO.saveEntity(user);
+
+            Log.info("Is this a Driver or Employee?");
+            Log.info("1.No, just consumer");
+            Log.info("2.Driver");
+            Log.info("3.Employee");
+            int option = Input.getInput().sc.nextInt();
+            Input.getInput().sc.nextLine();
+            switch (option) {
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+            }
+        }
+    }
+    @Override
+    public void updateUser(User user){
+        try (SqlSession session = getSession()) {
+            IUserDAO userDAO = session.getMapper(IUserDAO.class);
+            userDAO.updateEntity(user);
+        }
+    }
 
     @Override
     public void uMenu(User user){
@@ -141,10 +149,5 @@ public class UserServices implements IUserServices{
         else{
             Log.info("Your cart is empty, operation cancelled");
         }
-    }
-
-    @Override
-    public void updateUser(User user) {
-        userDAO.updateEntity(user);
     }
 }

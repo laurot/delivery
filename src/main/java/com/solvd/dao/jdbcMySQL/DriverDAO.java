@@ -34,9 +34,10 @@ public class DriverDAO implements IDriverDAO{
     }
 
     @Override
-    public Driver getFreeDriver() {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT id,id_user,MAX(rating),free FROM driver WHERE free = 1 GROUP BY id");
+    public Driver getFreeDriver() {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT id,id_user,MAX(rating),free FROM driver WHERE free = 1 GROUP BY id");
             ResultSet rs = ps.executeQuery();
            
             if(rs.next()){
@@ -49,6 +50,14 @@ public class DriverDAO implements IDriverDAO{
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

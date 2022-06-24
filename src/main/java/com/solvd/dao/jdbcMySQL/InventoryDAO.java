@@ -35,9 +35,10 @@ public class InventoryDAO implements IInventoryDAO{
     }
 
     @Override
-    public List<Inventory> getInventoryByStoreId(Long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM inventory WHERE id_store = ?");
+    public List<Inventory> getInventoryByStoreId(Long id) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM inventory WHERE id_store = ?");
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             List<Inventory> stock = new ArrayList<Inventory>();
@@ -52,6 +53,14 @@ public class InventoryDAO implements IInventoryDAO{
             return stock;
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

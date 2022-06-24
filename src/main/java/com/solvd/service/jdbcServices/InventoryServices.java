@@ -8,7 +8,7 @@ import com.solvd.bin.stores.Inventory;
 import com.solvd.bin.stores.Store;
 import com.solvd.dao.IInventoryDAO;
 import com.solvd.dao.jdbcMySQL.InventoryDAO;
-import com.solvd.service.interfaces.IInventoryServices;
+import com.solvd.service.IInventoryServices;
 import com.solvd.util.Input;
 
 public class InventoryServices implements IInventoryServices{

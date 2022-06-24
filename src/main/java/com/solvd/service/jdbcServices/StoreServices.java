@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.bin.stores.Store;
 import com.solvd.dao.IStoreDAO;
 import com.solvd.dao.jdbcMySQL.StoreDAO;
-import com.solvd.service.interfaces.IStoreServices;
+import com.solvd.service.IStoreServices;
 import com.solvd.util.Input;
 
 public class StoreServices implements IStoreServices{

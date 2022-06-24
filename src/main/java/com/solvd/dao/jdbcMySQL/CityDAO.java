@@ -14,12 +14,10 @@ public class CityDAO implements ICityDAO{
     private CountryDAO countryDAO = new CountryDAO();
 
     @Override
-    public City getEntityById(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM city WHERE id = ?");
+    public City getEntityById(long id) {        PreparedStatement ps = null;
+try(Connection con = DBCPDataSource.getConnection()){ ps = con.prepareStatement("SELECT * FROM city WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
-           
             if(rs.next()){
                 City c = new City();
                 c.setId(id);

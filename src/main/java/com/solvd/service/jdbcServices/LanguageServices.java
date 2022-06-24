@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.bin.Languages;
 import com.solvd.dao.ILanguageDAO;
 import com.solvd.dao.jdbcMySQL.LanguageDAO;
-import com.solvd.service.interfaces.ILanguageServices;
+import com.solvd.service.ILanguageServices;
 import com.solvd.util.Input;
 
 public class LanguageServices implements ILanguageServices{

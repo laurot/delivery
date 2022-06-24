@@ -1,10 +1,10 @@
-package com.solvd.service.daoServices;
+package com.solvd.service.myBatis;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.solvd.bin.user.Driver;
 import com.solvd.dao.IDriverDAO;
-import com.solvd.service.interfaces.IDriverServices;
+import com.solvd.service.IDriverServices;
 
 public class DriverServices extends Services implements IDriverServices{
     

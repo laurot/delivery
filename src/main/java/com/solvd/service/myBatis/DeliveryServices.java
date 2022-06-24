@@ -1,4 +1,4 @@
-package com.solvd.service.daoServices;
+package com.solvd.service.myBatis;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.solvd.bin.orders.Delivery;
 import com.solvd.bin.orders.DeliveryProducts;
 import com.solvd.dao.IDeliveryDAO;
 import com.solvd.dao.IDeliveryProductsDAO;
-import com.solvd.service.interfaces.IDeliveryServices;
+import com.solvd.service.IDeliveryServices;
 
 public class DeliveryServices extends Services implements IDeliveryServices{
 

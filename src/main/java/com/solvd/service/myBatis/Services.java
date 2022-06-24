@@ -1,4 +1,4 @@
-package com.solvd.service.daoServices;
+package com.solvd.service.myBatis;
 
 import org.apache.ibatis.session.SqlSession;
 

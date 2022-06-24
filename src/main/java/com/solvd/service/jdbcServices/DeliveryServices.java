@@ -8,7 +8,7 @@ import com.solvd.dao.IDeliveryDAO;
 import com.solvd.dao.IDeliveryProductsDAO;
 import com.solvd.dao.jdbcMySQL.DeliveryDAO;
 import com.solvd.dao.jdbcMySQL.DeliveryProductsDAO;
-import com.solvd.service.interfaces.IDeliveryServices;
+import com.solvd.service.IDeliveryServices;
 
 public class DeliveryServices implements IDeliveryServices{
 

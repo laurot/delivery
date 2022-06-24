@@ -15,9 +15,10 @@ public class ProductDAO implements IProductDAO{
     private IBrandDAO brandDAO = new BrandDAO();
 
     @Override
-    public Product getEntityById(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM product WHERE id = ?");
+    public Product getEntityById(long id) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM product WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
            
@@ -31,6 +32,14 @@ public class ProductDAO implements IProductDAO{
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

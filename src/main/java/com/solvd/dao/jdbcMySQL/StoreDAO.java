@@ -35,9 +35,10 @@ public class StoreDAO implements IStoreDAO{
     }
 
     @Override
-    public List<Store> getStoresByCityId(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement(
+    public List<Store> getStoresByCityId(long id) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement(
                 "SELECT s.* FROM store s join address a on a.id = s.id_address WHERE a.id_city = ?");
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
@@ -51,6 +52,14 @@ public class StoreDAO implements IStoreDAO{
             return stores;
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

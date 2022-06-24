@@ -12,12 +12,13 @@ public class CountryDAO implements ICountryDAO{
     private Logger LOGGER = LogManager.getLogger();
     
     @Override
-    public Country getEntityById(long id) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM country WHERE id = ?");
+    public Country getEntityById(long id) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM country WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
-           
+            ps.close();
             if(rs.next()){
                 Country c = new Country();
                 c.setId(id);
@@ -27,6 +28,14 @@ public class CountryDAO implements ICountryDAO{
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

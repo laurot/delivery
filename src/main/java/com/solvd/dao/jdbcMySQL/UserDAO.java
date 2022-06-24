@@ -15,9 +15,9 @@ public class UserDAO implements IUserDAO{
 
     @Override
     public User getEntityById(long id) {
-
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE id = ?");
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM user WHERE id = ?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
            
@@ -32,6 +32,14 @@ public class UserDAO implements IUserDAO{
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }
@@ -53,9 +61,10 @@ public class UserDAO implements IUserDAO{
 
 
     @Override
-    public User getUserByUsername(String user) {
-        try(Connection con = DBCPDataSource.getConnection()){
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE username = ?");
+    public User getUserByUsername(String user) {        
+        PreparedStatement ps = null;
+        try(Connection con = DBCPDataSource.getConnection()){ 
+            ps = con.prepareStatement("SELECT * FROM user WHERE username = ?");
             ps.setString(1,user);
             ResultSet rs = ps.executeQuery();
            
@@ -71,6 +80,14 @@ public class UserDAO implements IUserDAO{
             }
         }catch(SQLException se){
             LOGGER.warn(se.getMessage());
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    LOGGER.error("Error in SQL", e);
+                }
+            }
         }
         return null;
     }

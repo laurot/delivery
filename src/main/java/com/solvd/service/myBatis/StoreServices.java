@@ -1,4 +1,4 @@
-package com.solvd.service.daoServices;
+package com.solvd.service.myBatis;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.*;
 import com.solvd.bin.stores.Store;
 import com.solvd.dao.IStoreDAO;
-import com.solvd.service.interfaces.IStoreServices;
+import com.solvd.service.IStoreServices;
 import com.solvd.util.Input;
 
 public class StoreServices extends Services implements IStoreServices {
